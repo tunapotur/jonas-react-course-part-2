@@ -55,9 +55,6 @@ export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
 
-  //This state uses for outside of star raiting handler
-  const [movieRating, setMovieRating] = useState(0);
-
   return (
     <>
       <NavBar>
@@ -66,18 +63,14 @@ export default function App() {
       </NavBar>
 
       <Main>
-        <div>
-          <StarRating maxRating={10} onSetRating={setMovieRating} />
-          <h1>This movie was rated {movieRating} stars</h1>
-        </div>
-        {/* <Box>
+        <Box>
           <MovieList movies={movies} />
         </Box>
 
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
-        </Box> */}
+        </Box>
       </Main>
     </>
   );
