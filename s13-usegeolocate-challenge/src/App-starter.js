@@ -1,12 +1,18 @@
-//*  	instructor soliton (Original)
 import { useState } from "react";
 
-function useGeolocation() {
+function useGeolocation() {}
+
+export default function App() {
   const [isLoading, setIsLoading] = useState(false);
+  const [countClicks, setCountClicks] = useState(0);
   const [position, setPosition] = useState({});
   const [error, setError] = useState(null);
 
+  const { lat, lng } = position;
+
   function getPosition() {
+    setCountClicks((count) => count + 1);
+
     if (!navigator.geolocation)
       return setError("Your browser does not support geolocation");
 
@@ -26,27 +32,9 @@ function useGeolocation() {
     );
   }
 
-  return { isLoading, position, error, getPosition };
-}
-
-export default function App() {
-  const {
-    isLoading,
-    position: { lat, lng },
-    error,
-    getPosition,
-  } = useGeolocation();
-
-  const [countClicks, setCountClicks] = useState(0);
-
-  function handleClick() {
-    setCountClicks((count) => count + 1);
-    getPosition();
-  }
-
   return (
     <div>
-      <button onClick={handleClick} disabled={isLoading}>
+      <button onClick={getPosition} disabled={isLoading}>
         Get my position
       </button>
 
